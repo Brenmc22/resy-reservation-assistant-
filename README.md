@@ -1,22 +1,38 @@
-# resy-reservation-assistant-# Reservation Availability Assistant
+# Reservation Availability Assistant
 
-An educational **Python + Playwright** browser-automation project exploring reservation discovery, interface inspection, and time-preference matching.
+**Python + Playwright | Browser Automation | Responsible UX**
 
-## Overview
+An educational reservation-availability assistant demonstrating browser navigation, interface inspection, and preferred-time matching.
 
-This project began as a reservation-booking workflow prototype. The public portfolio edition demonstrates the core technical ideas without storing personal information, payment credentials, or authenticated sessions. It **does not automatically book reservations**.
+## Project overview
+
+This project began as a reservation-booking workflow prototype. Its public portfolio edition focuses on the technical and UX principles of finding preferred reservation times while protecting account and payment details. **It does not automatically book or pay for reservations.**
 
 ## What it demonstrates
 
-- Browser navigation and DOM inspection with Playwright
-- Matching preferred times against visible button labels
-- Basic input validation and error-safe browser cleanup
-- Separation of configuration from code using an environment variable
-- Privacy-aware design: no CVV entry, saved browser profile, or checkout submission
+- **Browser automation:** Open a public restaurant page using Playwright and Chromium.
+- **DOM inspection:** Collect button labels to identify times visible on the page.
+- **Preference matching:** Compare visible labels with a configurable list of preferred times.
+- **Input validation:** Accept only public `resy.com` URLs in the example.
+- **Privacy by design:** Avoid storing credentials, card details, CVV, cookies, or login sessions.
+- **Human confirmation:** Leave any actual reservation decision and submission to the person using the service.
 
-## Getting started
+## Technology
 
-Requires Python 3.10+.
+- Python 3.10+
+- Playwright for Python
+- Chromium
+
+## How it works
+
+1. Open a public page in Chromium.
+2. Read visible button labels once.
+3. Convert preferred times from 24-hour format to 12-hour labels.
+4. Display potential matches for manual review.
+
+A matching label does **not** guarantee an available table.
+
+## Run locally
 
 ```bash
 python -m pip install -r requirements.txt
@@ -24,21 +40,17 @@ python -m playwright install chromium
 python reservation_assistant.py
 ```
 
-By default the script opens Resy's public homepage once. To inspect a specific public restaurant page, set `RESERVATION_URL` in your shell before running. Only public `resy.com` URLs are accepted.
+By default, the script opens the Resy homepage. You can optionally set a public restaurant URL:
 
-## How it works
+```bash
+export RESERVATION_URL="https://resy.com/"
+python reservation_assistant.py
+```
 
-1. Open a public page in Chromium.
-2. Read visible button labels from the current page snapshot.
-3. Compare them against configured preferred times.
-4. Print possible matches for manual review.
+## Privacy and responsible use
 
-A match is **not** confirmation that a table is available. Actual booking, if permitted, must be performed manually through the service.
+This project is for educational purposes and portfolio review. It is not affiliated with or endorsed by Resy. Respect the website's terms and request limits. The script does not repeatedly poll, sign in, enter payment information, or submit reservations. Never commit account profiles, access tokens, session cookies, or payment information.
 
-## Responsible use
+## Portfolio relevance
 
-This repository is for education and portfolio review. It is not affiliated with or endorsed by Resy. Respect the site's terms, access controls, and request limits. Do not commit login profiles, session cookies, payment information, or private account details.
-
-## Portfolio context
-
-The project showcases workflow modeling, Python scripting, browser interaction, and consideration of privacy and human confirmation in automated experiences.
+The project showcases workflow thinking, automation prototyping, interface parsing, responsible design constraints, and translating a practical user goal into a small, inspectable software tool.
